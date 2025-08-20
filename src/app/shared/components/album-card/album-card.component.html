@@ -1,0 +1,14 @@
+@if(album()) {
+<mat-card class="album-card">
+  <img mat-card-image [src]="album().coverArtUrl" [alt]="album().collectionName" (click)="onViewDetails()">
+  <mat-card-content>
+    <h3 (click)="onViewDetails()">{{ album().collectionName }}</h3>
+    <p>{{ album().artistName }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button (click)="onToggleFavorite()">
+      <mat-icon [color]="album().isFavorite ? 'warn' : ''">favorite</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
+}
