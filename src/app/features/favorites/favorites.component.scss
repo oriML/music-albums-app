@@ -1,0 +1,21 @@
+.favorites-container {
+  padding: 20px;
+}
+
+.no-favorites {
+  text-align: center;
+  margin-top: 50px;
+
+  p {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 20px;
+  }
+}
+
+.album-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
