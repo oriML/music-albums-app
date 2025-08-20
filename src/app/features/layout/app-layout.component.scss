@@ -1,0 +1,31 @@
+.home-container {
+  height: calc(100vh - 64px); // Adjust based on your toolbar height
+}
+
+mat-sidenav {
+  width: 200px;
+  padding-top: 20px;
+}
+
+mat-toolbar {
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar {
+  width: 80%;
+  max-width: 600px;
+  background-color: white;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+.album-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+

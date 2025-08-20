@@ -1,0 +1,6 @@
+<mat-nav-list>
+    @for(menuItem of menuItems; track menuItem.path){
+    <a mat-list-item [routerLink]="'/' + menuItem.path">{{menuItem.name}}</a>
+    }
+    <a mat-list-item class="logout-menu-item" (click)="logout()">Logout</a>
+</mat-nav-list>
