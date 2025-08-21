@@ -1,0 +1,26 @@
+<div class="albums-grid">
+
+  @if (albums() && !loading()) {
+  @for (album of albums(); track album.id) {
+  <app-album-card [album]="album" (toggleFavoriteEvent)="toggleFavorite($event)">
+  </app-album-card>
+  }
+  @empty {
+  <div class="no-results">
+    <p>No albums found. Try a different search term or filter.</p>
+  </div>
+  }}
+
+
+  @if (loading()) {
+  <div class="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+  }
+
+  @if (error()) {
+  <div class="error-message">
+    <p>{{ error() }}</p>
+  </div>
+  }
+</div>

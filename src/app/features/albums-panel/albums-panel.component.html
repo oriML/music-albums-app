@@ -1,0 +1,22 @@
+@if (!isAlbumDetailRoute()) {
+    <app-album-search-panel (triggerSearchEvent)="triggerSearchEvent($event)"></app-album-search-panel>
+    <div class="albums-container" cdkScrollable #scrollContainer>
+        <app-album-list
+            [albums]="albums()"
+            (toggleFavoriteEvent)="toggleFavoriteEvent($event)"
+        />
+        @if (loading() && hasMoreAlbums()) {
+            <div class="loading-more-spinner">
+                <mat-spinner></mat-spinner>
+                <p>Loading more albums...</p>
+            </div>
+        }
+        @if (error()) {
+            <div class="error-message">
+                <p>{{ error() }}</p>
+            </div>
+        }
+    </div>
+} @else {
+    <router-outlet></router-outlet>
+}

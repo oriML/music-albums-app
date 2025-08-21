@@ -1,0 +1,46 @@
+.search-bar {
+  width: 60%;
+  margin-right: 20px;
+}
+
+.filter-select {
+  width: 20%;
+}
+
+.no-results {
+  text-align: center;
+  margin-top: 50px;
+  width: 100%;
+
+  p {
+    font-size: 1.2em;
+    color: #666;
+  }
+}
+
+.waiting p {
+  display: inline-block;
+  font-size: 1.2rem;
+  animation: float 1.5s ease-in-out infinite;
+  color: #333;
+  text-align: center;
+  margin-top: 50px;
+  width: 100%;
+
+  p {
+    font-size: 1.2em;
+    color: #666;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
