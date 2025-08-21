@@ -1,10 +1,86 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'app/shared/styles/themes' as *;
 
-html, body {
-  height: 100%;
+html,
+body {
+    height: 100%;
 }
 
 body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-color-primary);
+
+    &.dark {
+        @extend .dark;
+    }
+}
+
+.mat-mdc-card {
+    background-color: var(--bg-secondary);
+    color: var(--text-color-primary);
+}
+
+.mat-mdc-form-field-focus-overlay {
+    background-color: var(--text-color-primary) !important;
+}
+
+.mat-mdc-text-field-wrapper {
+    background-color: var(--bg-secondary);
+}
+
+.mat-mdc-select-arrow {
+    color: var(--text-color-primary);
+}
+
+.mat-mdc-select-value {
+    color: var(--text-color-primary);
+}
+
+.mat-mdc-form-field-label {
+    color: var(--accent-cyan-color);
+}
+
+.mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
+    color: var(--accent-cyan-color);
+}
+
+.mat-mdc-button.mat-primary,
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-fab.mat-primary,
+.mat-mdc-mini-fab.mat-primary {
+    background-color: var(--accent-blue-color);
+}
+
+.mat-mdc-input-element {
+    color: var(--text-color-primary);
+}
+
+.mat-mdc-select-min-line {
+    color: var(--text-color-primary);
+}
+
+.mat-mdc-select-arrow svg {
+    fill: var(--text-color-primary);
+}
+
+.albums-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.error-message {
+    background-color: rgb(209, 52, 52);
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 2%;
+    text-align: center;
+    margin-top: 20px;
+
+    p {
+        margin: 0;
+    }
 }
