@@ -4,6 +4,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: var(--bg-secondary);
+  color: var(--text-color-primary);
+  border: 1px solid var(--accent-blue-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   img {
     cursor: pointer;
@@ -19,10 +23,11 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      color: var(--text-color-primary);
     }
     p {
       font-size: 0.9em;
-      color: #666;
+      color: var(--accent-cyan-color);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;

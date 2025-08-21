@@ -1,9 +1,9 @@
 @if(album()) {
 <mat-card class="album-card">
-  <img mat-card-image [src]="album().coverArtUrl" [alt]="album().collectionName" (click)="onViewDetails()">
+  <img mat-card-image [src]="album().images[0].url" [alt]="album().name" (click)="onViewDetails()">
   <mat-card-content>
-    <h3 (click)="onViewDetails()">{{ album().collectionName }}</h3>
-    <p>{{ album().artistName }}</p>
+    <h3 (click)="onViewDetails()">{{ album().name }}</h3>
+    <p>{{ album().artists[0].name }}</p>
   </mat-card-content>
   <mat-card-actions>
     <button mat-icon-button (click)="onToggleFavorite()">
