@@ -1,0 +1,46 @@
+:root {
+  --light-background-primary: #f0f2f5;
+  --light-background-secondary: #ffffff;
+  --light-accent-blue: #6c7b95;
+  --light-accent-cyan: #8d9db6;
+  --light-text-primary: #333333;
+  --light-text-secondary: #666666;
+
+  --light-background-secondary-hover: #f0f0f0;
+  --light-accent-blue-hover: #616f87;
+
+  /* Dark Theme */
+  --background-primary: #152a41;
+  --background-secondary: #1b263b;
+  --accent-blue: #415a77;
+  --accent-cyan: #778da9;
+  --text-primary: #e0e1dd;
+  --text-secondary: #a9b0c0;
+
+  --background-secondary-hover: #172130;
+  --accent-blue-hover: #3a516b;
+}
+
+body {
+  &.dark {
+    --bg-primary: var(--background-primary);
+    --bg-secondary: var(--background-secondary);
+    --accent-blue-color: var(--accent-blue);
+    --accent-cyan-color: var(--accent-cyan);
+    --text-color-primary: var(--text-primary);
+    --text-color-secondary: var(--text-secondary);
+    --bg-secondary-hover: var(--background-secondary-hover);
+    --accent-blue-hover-color: var(--accent-blue-hover);
+  }
+
+  &.light {
+    --bg-primary: var(--light-background-primary);
+    --bg-secondary: var(--light-background-secondary);
+    --accent-blue-color: var(--light-accent-blue);
+    --accent-cyan-color: var(--light-accent-cyan);
+    --text-color-primary: var(--light-text-primary);
+    --text-color-secondary: var(--light-text-secondary);
+    --bg-secondary-hover: var(--light-background-secondary-hover);
+    --accent-blue-hover-color: var(--light-accent-blue-hover);
+  }
+}
