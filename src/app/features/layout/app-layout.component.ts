@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { RouterOutlet } from "@angular/router";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
+import { HeaderComponent } from "../../shared/components/header/header.component";
 
 @Component({
   selector: 'app-layout',
@@ -13,6 +14,7 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component";
     RouterOutlet,
     MatSidenavModule,
     SidenavComponent,
+    HeaderComponent,
   ]
 })
 export class AppLayoutComponent  {

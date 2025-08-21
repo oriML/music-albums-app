@@ -1,10 +1,16 @@
+mat-sidenav-content {
+  background-color: var(--bg-primary);
+}
+
 .home-container {
-  height: calc(100vh - 64px); // Adjust based on your toolbar height
+  height: calc(100vh - 64px)
 }
 
 mat-sidenav {
   width: 200px;
   padding-top: 20px;
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--accent-blue-color);
 }
 
 mat-toolbar {
@@ -21,11 +27,3 @@ mat-toolbar {
   border-radius: 4px;
   padding: 5px 10px;
 }
-
-.album-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px;
-}
-
