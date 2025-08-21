@@ -11,24 +11,23 @@ export class FavoritesService {
   
   private _favorites = signal<Album[]>(this.loadFavorites());
   public readonly favorites = computed(() => this._favorites());
-  private readonly FAVORITES_KEY = 'favoriteAlbums';
 
   private loadFavorites(): Album[] {
-    return this.localStorageService.getItem<Album[]>(this.FAVORITES_KEY) || [];
+    return this.localStorageService.getItem<Album[]>('favoriteAlbums') || [];
   }
 
   private saveFavorites(favorites: Album[]): void {
-    this.localStorageService.setItem(this.FAVORITES_KEY, favorites);
+    this.localStorageService.setItem('favoriteAlbums', favorites);
     this._favorites.set(favorites);
   }
 
   isFavorite(albumId: string): boolean {
-    return this._favorites().some(album => album.collectionId === albumId);
+    return this._favorites().some(album => album.id === albumId);
   }
 
   addFavorite(album: Album): void {
     const currentFavorites = this._favorites();
-    if (!this.isFavorite(album.collectionId)) {
+    if (!this.isFavorite(album.id)) {
       const updatedFavorites = [...currentFavorites, { ...album, isFavorite: true }];
       this.saveFavorites(updatedFavorites);
     }
@@ -36,15 +35,20 @@ export class FavoritesService {
 
   removeFavorite(albumId: string): void {
     const currentFavorites = this._favorites();
-    const updatedFavorites = currentFavorites.filter(album => album.collectionId !== albumId);
+    const updatedFavorites = currentFavorites.filter(album => album.id !== albumId);
     this.saveFavorites(updatedFavorites);
   }
 
   toggleFavorite(album: Album): void {
-    if (this.isFavorite(album.collectionId)) {
-      this.removeFavorite(album.collectionId);
+    const currentFavorites = this._favorites();
+    const albumIndex = currentFavorites.findIndex(favAlbum => favAlbum.id === album.id);
+
+    if (albumIndex > -1) {
+      const updatedFavorites = currentFavorites.filter(favAlbum => favAlbum.id !== album.id);
+      this.saveFavorites(updatedFavorites);
     } else {
-      this.addFavorite(album);
+      const updatedFavorites = [...currentFavorites, { ...album, isFavorite: true }];
+      this.saveFavorites(updatedFavorites);
     }
   }
 }
