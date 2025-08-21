@@ -1,0 +1,49 @@
+<div class="album-details-container">
+  <mat-card class="album-detail-card">
+    <div class="top-section">
+      <img [src]="album().images[0].url" alt="{{ album().name }}" class="cover-image" />
+
+      <div class="info-section">
+        <h1>{{ album().name }}</h1>
+
+        <h3 class="artist-list">
+          @for (artist of album().artists; track artist.id) {
+          <a [href]="'https://open.spotify.com/artist/' + artist.id" target="_blank">
+            {{ artist.name }}
+          </a>@if (!$last) {<span>, </span>}
+          }
+        </h3>
+
+        <p><strong>Release Date:</strong> {{ album().release_date }}</p>
+        <p><strong>Total Tracks:</strong> {{ album().total_tracks }}</p>
+
+        <div class="actions">
+          <a mat-raised-button color="accent" [href]="album().external_url" target="_blank">
+            <mat-icon>open_in_new</mat-icon> Listen on Spotify
+          </a>
+
+          <button mat-icon-button (click)="toggleFavorite(album())">
+            <mat-icon [color]="album().isFavorite ? 'warn' : ''">
+              favorite
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <mat-card-content class="tracks-section">
+      <h2>Tracklist</h2>
+      <mat-list>
+        @for (track of album().tracks; track track.id) {
+        <mat-list-item>
+          <div class="track-line">
+            <span class="track-number">{{ track.track_number }}.</span>
+            <span class="track-name">{{ track.name }}</span>
+            <span class="track-duration">{{ formatDuration(track.duration_ms) }}</span>
+          </div>
+        </mat-list-item>
+        }
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>
