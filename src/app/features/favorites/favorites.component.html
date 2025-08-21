@@ -1,15 +1,7 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="goBack()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <span>Favorite Albums</span>
-</mat-toolbar>
-
 <div class="favorites-container">
-  <div class="album-grid">
-    @for(album of favoriteAlbums(); track album.collectionId) {
-    <app-album-card [album]="album" (toggleFavoriteEvent)="toggleFavorite($event)"
-      (viewDetails)="viewAlbumDetails($event)"></app-album-card>
+  <div class="albums-grid">
+    @for(album of favoriteAlbums; track album.id) {
+    <app-album-card [album]="album" (toggleFavoriteEvent)="toggleFavorite($event)"></app-album-card>
     } @empty {
     <div class="no-results">
       <p>No favorites yet. You can add them from the albums panel.</p>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -29,17 +29,20 @@ export class FavoritesComponent implements OnInit {
   private favoritesService = inject(FavoritesService);
   private router = inject(Router);
 
-  favoriteAlbums = signal<Album[]>(this.favoritesService.favorites());
+  favoriteAlbums = this.favoritesService.favorites();
 
   ngOnInit(): void {
+    this.favoriteAlbums
   }
 
   toggleFavorite(album: Album): void {
     this.favoritesService.toggleFavorite(album);
+    album.isFavorite = !album.isFavorite;
+    this.favoriteAlbums = this.favoritesService.favorites();
   }
 
   viewAlbumDetails(album: Album): void {
-    this.router.navigate(['/album'], { queryParams: { id: album.collectionId } });
+    this.router.navigate(['/'], { queryParams: { id: album.id } });
   }
 
   goBack(): void {
