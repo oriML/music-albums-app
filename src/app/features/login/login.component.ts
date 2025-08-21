@@ -11,6 +11,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../../core/services/local-storage.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 const materialModules = [
   ReactiveFormsModule,
@@ -37,6 +39,8 @@ export class LoginComponent {
   loginForm: FormGroup;
   registerForm: FormGroup;
   router = inject(Router);
+  authService = inject(AuthService);
+
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -52,15 +56,14 @@ export class LoginComponent {
 
   onLoginSubmit(): void {
     if (this.loginForm.valid) {
-      console.log('Login Form Submitted:', this.loginForm.value);
-      this.router.navigate(['/albums-panel']);
+      this.authService.login();
     }
   }
 
   onRegisterSubmit(): void {
     if (this.registerForm.valid) {
       console.log('Register Form Submitted:', this.registerForm.value);
-      
+
     }
   }
 }
