@@ -1,0 +1,32 @@
+mat-sidenav {
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--accent-blue-color);
+}
+
+.mat-mdc-list-item {
+  color: var(--text-color-primary);
+  display: flex;
+  align-items: center;
+
+  .mat-icon {
+    margin-right: 10px;
+    color: var(--accent-cyan-color);
+  }
+}
+
+.mat-mdc-list-item:hover {
+  background-color: var(--accent-blue-color);
+}
+
+.logout-menu-item {
+  border-top: 1px solid var(--accent-blue-color);
+  margin-top: auto;
+}
+
+.theme-toggle-item {
+  width: fit-content;
+  margin-left: auto;
+  .mat-icon {
+    margin-right: 0;
+  }
+}
