@@ -1,0 +1,10 @@
+mat-toolbar {
+  background-color: var(--bg-secondary);
+  color: var(--text-color-primary);
+  border-bottom: 1px solid var(--accent-blue-color);
+}
+
+span {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
