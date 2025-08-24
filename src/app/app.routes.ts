@@ -1,13 +1,18 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './features/auth/auth.guard';
-import { loginGuard } from './features/login/login.guard';
+import { loginGuard } from './features/auth/login/login.guard';
 import { AppLayoutComponent } from './features/layout/app-layout.component';
 export const routes: Routes = [
   {
     path: 'login',
-    loadComponent: () => import('./features/login/login.component').then(m => m.LoginComponent),
+    loadComponent: () => import('./features/auth/login/login.component').then(m => m.LoginComponent),
     canMatch: [loginGuard],
     title: 'Login'
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./features/auth/register/register.component').then(m => m.RegisterComponent),
+    title: 'Register'
   },
   {
     path: '',
@@ -21,7 +26,7 @@ export const routes: Routes = [
         children: [
           {
             path: ':albumId',
-            loadComponent: () => import('./features/album-details/album-details-page.component').then(m => m.AlbumDetailsPageComponent),
+            loadComponent: () => import('./features/album-detail/album-detail.component').then(m => m.AlbumDetailComponent),
             title: 'Album Detail'
           },
         ]

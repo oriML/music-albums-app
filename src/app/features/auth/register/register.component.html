@@ -1,0 +1,43 @@
+<div class="register-container">
+  <div class="register-image-section">
+    <img src="welcome_banner.png" alt="Welcome Banner" class="welcome-banner">
+  </div>
+  <div class="register-form-section">
+    <mat-card class="register-form">
+      <h2>Register</h2>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" required>
+          @if (registerForm.get('username')?.invalid && registerForm.get('username')?.touched) {
+          @if (registerForm.get('username')?.errors?.['required']) {
+          <mat-error>Username is required</mat-error>
+          }
+          @if (registerForm.get('username')?.errors?.['minlength']) {
+          <mat-error>Username must be at least 3 characters long</mat-error>
+          }
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" required>
+          @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+          @if (registerForm.get('password')?.errors?.['required']) {
+          <mat-error>Password is required</mat-error>
+          }
+          @if (registerForm.get('password')?.errors?.['minlength']) {
+          <mat-error>Password must be at least 6 characters long</mat-error>
+          }
+          }
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Register</button>
+      </form>
+      @if (errorMessage()) {
+      <p class="error-message">{{ errorMessage() }}</p>
+      }
+      <p class="login-link">Already have an account? <a routerLink="/login">Login here</a></p>
+    </mat-card>
+  </div>
+</div>
