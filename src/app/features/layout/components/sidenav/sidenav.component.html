@@ -1,10 +1,15 @@
 <mat-nav-list>
+    <h3 class="sidenav-username">Welcome, {{ username() }}</h3>
     <!-- <a mat-list-item (click)="toggleTheme()" class="theme-toggle-item">
-        @if(isDarkTheme()) {
-        <mat-icon>brightness_7</mat-icon>
-        } @else {
-        <mat-icon>brightness_4</mat-icon>
-        }
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            @if(isDarkTheme()) {
+            <mat-icon>brightness_7</mat-icon>
+            <span>Toggle Light Theme</span>
+            } @else {
+            <mat-icon>brightness_4</mat-icon>
+            <span>Toggle Dark Theme</span>
+            }
+        </div>
     </a> -->
 
     @for(menuItem of menuItems; track menuItem.path){

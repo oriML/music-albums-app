@@ -1,0 +1,13 @@
+.snackbar-content {
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    margin-right: 8px;
+    color: inherit; /* Inherit color from parent snackbar */
+  }
+
+  span {
+    flex-grow: 1;
+  }
+}

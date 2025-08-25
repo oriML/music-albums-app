@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -21,6 +21,12 @@ import { ThemeService } from '../../../../core/services/theme.service';
 export class SidenavComponent {
   private _authService = inject(AuthService);
   private _themeService = inject(ThemeService);
+
+  public username = signal<string | null>(null);
+
+  constructor() {
+    this.username.set(this._authService.getLoggedInUsername());
+  }
 
   public menuItems = [
     { name: 'Albums Panel', path: 'albums-panel', icon: 'album' },

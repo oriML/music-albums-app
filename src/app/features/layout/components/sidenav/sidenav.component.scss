@@ -24,9 +24,16 @@ mat-sidenav {
 }
 
 .theme-toggle-item {
-  width: fit-content;
-  margin-left: auto;
   .mat-icon {
     margin-right: 0;
   }
+}
+
+.sidenav-username {
+  color: var(--text-color-primary);
+  padding: 16px;
+  font-size: 1.1em;
+  font-weight: 500;
+  border-bottom: 1px solid var(--accent-blue-color);
+  margin-bottom: 10px;
 }

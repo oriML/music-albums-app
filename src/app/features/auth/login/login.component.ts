@@ -21,7 +21,7 @@ export class LoginComponent {
   private router = inject(Router);
 
   loginForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
 
@@ -30,15 +30,15 @@ export class LoginComponent {
   async onSubmit(): Promise<void> {
     this.errorMessage.set(null);
     if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      if (username && password) {
-        const success = await this.authService.login(username, password);
+      const { email, password } = this.loginForm.value;
+      if (email && password) {
+        const success = await this.authService.login(email, password);
         if (!success) {
-          this.errorMessage.set('Invalid username or password.');
+          this.errorMessage.set('Invalid email or password.');
         }
       }
     } else {
-      this.errorMessage.set('Please enter username and password.');
+      this.errorMessage.set('Please enter email and password.');
     }
   }
 }
