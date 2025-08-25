@@ -64,6 +64,10 @@ body {
     fill: var(--text-color-primary);
 }
 
+mat-option .mdc-list-item__primary-text {
+    width: 100%;
+}
+
 .albums-grid {
     display: flex;
     flex-wrap: wrap;
@@ -71,16 +75,31 @@ body {
     padding: 20px;
 }
 
-.error-message {
-    background-color: rgb(209, 52, 52);
+.error-snackbar {
+    background-color: #d32f2f;
+    /* Material Red 700 */
     color: white;
-    font-weight: bold;
-    border-radius: 10px;
-    padding: 2%;
-    text-align: center;
-    margin-top: 20px;
+}
 
-    p {
-        margin: 0;
+.success-snackbar {
+    background-color: #43a047;
+    /* Material Green 600 */
+    color: white;
+}
+
+.info-snackbar {
+    background-color: #1976d2;
+    /* Material Blue 700 */
+    color: white;
+}
+
+.snackbar-content {
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+        margin-right: 8px;
+        color: white;
+        /* Ensure icon color matches text */
     }
 }

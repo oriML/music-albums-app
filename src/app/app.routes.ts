@@ -20,13 +20,18 @@ export const routes: Routes = [
     component: AppLayoutComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'albums-panel',
+        pathMatch: 'full',
+      },
+      {
         path: 'albums-panel',
         loadComponent: () => import('./features/albums-panel/albums-panel.component').then(m => m.AlbumsPanelComponent),
         title: 'Albums Panel',
         children: [
           {
             path: ':albumId',
-            loadComponent: () => import('./features/album-detail/album-detail.component').then(m => m.AlbumDetailComponent),
+            loadComponent: () => import('./features/album-details/album-details-page.component').then(m => m.AlbumDetailsPageComponent),
             title: 'Album Detail'
           },
         ]
@@ -35,11 +40,6 @@ export const routes: Routes = [
         path: 'favorites',
         loadComponent: () => import('./features/favorites/favorites.component').then(m => m.FavoritesComponent),
         title: 'Favorites'
-      },
-      {
-        path: '',
-        redirectTo: 'albums-panel',
-        pathMatch: 'full',
       }
     ],
   },
