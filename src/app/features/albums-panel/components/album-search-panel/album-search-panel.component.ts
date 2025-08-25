@@ -49,7 +49,7 @@ export class AlbumSearchPanelComponent implements OnInit {
       distinctUntilChanged(),
       tap(term => {
         const filterType = this.filterTypeControl.value || 'album';
-        if (term && this.searchControl.valid) { // Only save and emit if valid
+        if (term && this.searchControl.valid) {
           this.saveQuery(term);
           this.triggerSearchEvent.emit({ term: term ?? '', filterType });
         }

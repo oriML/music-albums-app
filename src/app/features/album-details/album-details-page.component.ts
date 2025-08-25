@@ -36,8 +36,10 @@ export class AlbumDetailsPageComponent implements OnInit {
 
   error = computed(() => this.albumDetailService.error());
   loading = computed(() => this.albumDetailService.loading());
+
   album = computed(() => {
-    const album = this.albumDetailService.album()
+    const album = this.albumDetailService.album();
+    console.log('Album in computed:', album);
     if (album) {
       album.isFavorite = this.favoritesService.isFavorite(album.id);
     }

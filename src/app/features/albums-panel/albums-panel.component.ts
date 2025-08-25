@@ -6,17 +6,20 @@ import { FavoritesService } from '../../core/services/favorites.service';
 import { AlbumsService, FilterType } from './services/albums.service';
 import { ActivatedRoute, Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { AlbumListPage } from './components/album-list/album-list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CdkScrollable, ScrollDispatcher, ScrollingModule } from '@angular/cdk/scrolling';
 import { Subscription } from 'rxjs';
+import { AlbumDetailComponent } from '../album-details/components/album-details/album-details.component';
+import { AlbumCardComponent } from '../../shared/components/album-card/album-card.component';
+import { MarkFavoritePipe } from '../../shared/pipes/mark-favorite.pipe';
 
 @Component({
   selector: 'app-albums-panel',
   imports: [
     CommonModule,
-    AlbumListPage,
     AlbumSearchPanelComponent,
+    AlbumCardComponent,
+    MarkFavoritePipe,
     RouterOutlet,
     MatProgressSpinnerModule,
     ScrollingModule
@@ -26,7 +29,7 @@ import { Subscription } from 'rxjs';
 })
 export class AlbumsPanelComponent implements OnInit, AfterViewInit, OnDestroy {
   private favoritesService = inject(FavoritesService);
-  public albumsService = inject(AlbumsService); // Made public to access in template
+  public albumsService = inject(AlbumsService);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private scrollDispatcher = inject(ScrollDispatcher);
@@ -62,6 +65,10 @@ export class AlbumsPanelComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.scrollSubscription) {
       this.scrollSubscription.unsubscribe();
     }
+  }
+  
+  trackByAlbumId(index: number, album: Album): string {
+    return album.id;
   }
 
   onScroll(element: HTMLElement): void {

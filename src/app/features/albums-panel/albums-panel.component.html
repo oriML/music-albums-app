@@ -1,10 +1,15 @@
+
 @if (!isAlbumDetailRoute()) {
     <app-album-search-panel (triggerSearchEvent)="triggerSearchEvent($event)"></app-album-search-panel>
     <div class="albums-container" cdkScrollable #scrollContainer>
-        <app-album-list
-            [albums]="albums()"
-            (toggleFavoriteEvent)="toggleFavoriteEvent($event)"
-        />
+        <cdk-virtual-scroll-viewport itemSize="250" class="album-viewport">
+            <div class="album-grid">
+                @for (album of albums() | markFavorite; track trackByAlbumId($index, album)) {
+                    <app-album-card [album]="album" (toggleFavoriteEvent)="toggleFavoriteEvent($event)"></app-album-card>
+                }
+            </div>
+        </cdk-virtual-scroll-viewport>
+
         @if (loading() && hasMoreAlbums()) {
             <div class="loading-more-spinner">
                 <mat-spinner></mat-spinner>

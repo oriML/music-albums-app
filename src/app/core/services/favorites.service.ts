@@ -1,13 +1,14 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 import { Album } from '../models/album.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoritesService {
   private localStorageService = inject(LocalStorageService);
+  private notificationService = inject(NotificationService);
   
   private _favorites = signal<Album[]>(this.loadFavorites());
   public readonly favorites = computed(() => this._favorites());
@@ -30,6 +31,7 @@ export class FavoritesService {
     if (!this.isFavorite(album.id)) {
       const updatedFavorites = [...currentFavorites, { ...album, isFavorite: true }];
       this.saveFavorites(updatedFavorites);
+      this.notificationService.showSuccess(`${album.name} added to favorites!`, 'favorite');
     }
   }
 
@@ -37,6 +39,10 @@ export class FavoritesService {
     const currentFavorites = this._favorites();
     const updatedFavorites = currentFavorites.filter(album => album.id !== albumId);
     this.saveFavorites(updatedFavorites);
+    const removedAlbum = currentFavorites.find(album => album.id === albumId);
+    if (removedAlbum) {
+      this.notificationService.showInfo(`${removedAlbum.name} removed from favorites.`, 'favorite_border');
+    }
   }
 
   toggleFavorite(album: Album): void {
@@ -44,11 +50,9 @@ export class FavoritesService {
     const albumIndex = currentFavorites.findIndex(favAlbum => favAlbum.id === album.id);
 
     if (albumIndex > -1) {
-      const updatedFavorites = currentFavorites.filter(favAlbum => favAlbum.id !== album.id);
-      this.saveFavorites(updatedFavorites);
+      this.removeFavorite(album.id);
     } else {
-      const updatedFavorites = [...currentFavorites, { ...album, isFavorite: true }];
-      this.saveFavorites(updatedFavorites);
+      this.addFavorite(album);
     }
   }
 }

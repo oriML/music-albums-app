@@ -1,49 +1,55 @@
 <div class="album-details-container">
+  @if (isLoading) {
+  <div class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  }
+  @if (error) {
+  <div class="error-message">
+    <mat-card color="warn">{{ error }}</mat-card>
+    <button mat-raised-button color="primary" (click)="goBack()">Go Back</button>
+  </div>
+  }
+  @defer (when album()) {
   <mat-card class="album-detail-card">
     <div class="top-section">
-      <img [src]="album().images[0].url" alt="{{ album().name }}" class="cover-image" />
-
+      <img [src]="album().images[0].url" alt="{{ album().name }}" class="cover-image">
       <div class="info-section">
-        <h1>{{ album().name }}</h1>
-
-        <h3 class="artist-list">
+        <h2>{{ album().name }}</h2>
+        <h3>
           @for (artist of album().artists; track artist.id) {
-          <a [href]="'https://open.spotify.com/artist/' + artist.id" target="_blank">
-            {{ artist.name }}
-          </a>@if (!$last) {<span>, </span>}
+          <a [href]="'https://open.spotify.com/artist/' + artist.id" target="_blank">{{ artist.name }}</a>@if (!$last)
+          {<span>, </span>}
           }
         </h3>
-
-        <p><strong>Release Date:</strong> {{ album().release_date }}</p>
-        <p><strong>Total Tracks:</strong> {{ album().total_tracks }}</p>
-
-        <div class="actions">
-          <a mat-raised-button color="accent" [href]="album().external_url" target="_blank">
-            <mat-icon>open_in_new</mat-icon> Listen on Spotify
-          </a>
-
-          <button mat-icon-button (click)="toggleFavorite(album())">
-            <mat-icon [color]="album().isFavorite ? 'warn' : ''">
-              favorite
-            </mat-icon>
-          </button>
-        </div>
+        <p>Release Date: {{ album().release_date }}</p>
+        <p>Total Tracks: {{ album().total_tracks }}</p>
+        <a mat-raised-button color="accent" [href]="album().external_url" target="_blank">
+          <mat-icon>open_in_new</mat-icon> Listen on Spotify
+        </a>
+        <button mat-icon-button (click)="toggleFavorite()">
+          <mat-icon [color]="isFavorite() ? 'warn' : ''">favorite</mat-icon>
+        </button>
       </div>
     </div>
 
-    <mat-card-content class="tracks-section">
-      <h2>Tracklist</h2>
+    <mat-card-content>
+      <h3>Tracks</h3>
       <mat-list>
         @for (track of album().tracks; track track.id) {
         <mat-list-item>
-          <div class="track-line">
-            <span class="track-number">{{ track.track_number }}.</span>
-            <span class="track-name">{{ track.name }}</span>
-            <span class="track-duration">{{ formatDuration(track.duration_ms) }}</span>
-          </div>
+          <span matListItemTitle>{{ track.track_number }}. {{ track.name }}</span>
+          <span matListItemLine>{{ formatDuration(track.duration_ms) }}</span>
         </mat-list-item>
         }
       </mat-list>
     </mat-card-content>
   </mat-card>
+  }
+  @if (!isLoading && !error && !album) {
+  <div class="no-album-found">
+    <p>Album not found or invalid ID.</p>
+    <button mat-raised-button color="primary" (click)="goBack()">Go Back</button>
+  </div>
+  }
 </div>

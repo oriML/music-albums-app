@@ -8,6 +8,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
 import { Album } from '../../../../core/models/album.model';
+import { FavoritesService } from '../../../../core/services/favorites.service';
+import { AlbumDetailService } from '../../../../core/http/album-detail.service';
 
 @Component({
   selector: 'app-album-details',
@@ -26,10 +28,24 @@ import { Album } from '../../../../core/models/album.model';
 })
 export class AlbumDetailComponent implements OnInit {
 
+  private albumDetailService = inject(AlbumDetailService);
+  private favoritesService = inject(FavoritesService);
+  
   album = input.required<Album>();
-
   toggleFavoriteEvent = output<Album>();
   goBackEvent = output<void>();
+
+  get error() {
+    return this.albumDetailService.error();
+  }
+
+  get isLoading() {
+    return this.albumDetailService.loading();
+  }
+
+  isFavorite() {
+    return this.favoritesService.isFavorite(this.album()?.id || '')
+  };
 
   ngOnInit(): void {
 
@@ -39,9 +55,9 @@ export class AlbumDetailComponent implements OnInit {
     this.goBackEvent.emit();
   }
 
-  toggleFavorite(album: Album): void {
-    this.toggleFavoriteEvent.emit(album);
-    album.isFavorite = !album.isFavorite;
+  toggleFavorite(): void {
+    this.toggleFavoriteEvent.emit(this.album());
+    this.album().isFavorite = !this.album().isFavorite;
   }
 
   formatDuration(ms: number): string {

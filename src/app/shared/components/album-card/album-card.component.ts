@@ -27,6 +27,7 @@ export class AlbumCardComponent {
 
   onToggleFavorite(): void {
     this.toggleFavoriteEvent.emit(this.album());
+    this.album().isFavorite = !this.album().isFavorite;
   }
 
   onViewDetails(): void {
